@@ -22,21 +22,23 @@
     }
 
     .images {
-      image-rendering: pixelated;
+      position: absolute;
+      left: 2vw;                   /* stick to far left */
+      top: 50vh;                   /* halfway down the screen */
+      transform: translateY(-50%); /* pull it up half its own height to center vertically */
       display: flex;
-      flex-direction: column;   /* stack both gifs vertically */
-      align-items: flex-start;  /* align them left */
+      flex-direction: column;
+      align-items: flex-start;
+      image-rendering: pixelated;
     }
 
     .flashing-name {
         transform: scale(0.4);
         transform-origin: top left;
-        margin-top: 10px;
     }
 
     .mascot {
         transform: scale(1);
-        margin-top: -20px;
     }
 
     .stats-text {
