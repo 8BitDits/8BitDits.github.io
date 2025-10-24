@@ -12,7 +12,11 @@
       font-family: 'Georgia', Arial, sans-serif;
       justify-content: center; /* centers entire content horizontally */
       align-items: center;     /* centers vertically */
-      height: 100vh;
+      top: 50vh;                   /* halfway down the screen */
+      transform: translateY(-50%); /* pull it up half its own height to center vertically */
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
     }
 
     .content {
@@ -22,13 +26,9 @@
     }
 
     .images {
+      display: flex;
       position: absolute;
       left: 2vw;                   /* stick to far left */
-      top: 50vh;                   /* halfway down the screen */
-      transform: translateY(-50%); /* pull it up half its own height to center vertically */
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
       image-rendering: pixelated;
     }
 
