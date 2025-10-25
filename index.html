@@ -5,43 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>8BitDits</title>
 
-  <style>
-    body {
-      background-color: #825f80;
-      color: black;
-      font-family: 'Georgia', Arial, sans-serif;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+<style>
+  body {
+    background-color: #825f80;
+    color: black;
+    font-family: 'Georgia', Arial, sans-serif;
+    display: flex;               /* Create side-by-side layout */
+    justify-content: center;     /* Center horizontally */
+    align-items: flex-start;     /* Align to top */
+    height: 100vh;
+    margin: 0;
+    gap: 40px;                   /* Space between columns */
+  }
 
-    .character-images {
-      image-rendering: pixelated;
-      display: flex;
-      width: auto;
-      flex-direction: column;
-      align-items: flex-start;
-    }
+  .character-images {
+    image-rendering: pixelated;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: auto;                 /* Shrink to fit content */
+    margin-left: 40px;
+    margin-top: 40px;
+  }
 
-    .flashing-name {
-        transform: scale(0.4);
-        transform-origin: top left;
-        margin-top: 10px;
-    }
+  .flashing-name {
+      transform: scale(0.4);
+      transform-origin: top left;
+      margin-bottom: 10px;
+  }
 
-    .mascot {
-        transform: scale(1);
-        transform-origin: top left;
-       margin-top: -20px;
-    }
+  .mascot {
+      transform: scale(1);
+      transform-origin: top left;
+      margin-top: -20px;
+  }
 
-    .stats-text {
-      text-align: center;
-    }
+  .stats-text {
+    text-align: center;
+    margin-top: 60px;
+  }
+</style>
 
-
-    
-  </style>
 </head>
 
 <body>
