@@ -15,7 +15,7 @@
       height: 100vh;
     }
 
-    .images {
+    .character-images {
       image-rendering: pixelated;
       display: flex;
       flex-direction: column;
@@ -30,7 +30,8 @@
 
     .mascot {
         transform: scale(1);
-        margin-top: -20px;
+        transform-origin: top left;
+       margin-top: -20px;
     }
 
     .stats-text {
@@ -44,7 +45,7 @@
 
 <body>
 
-  <div class="images">
+  <div class="character-images">
     <img src="images/8bitdits-flashing-name.gif" alt="Flashing Name" class="flashing-name">
     <img src="images/8bitdits-mascot.gif" alt="8BitDits Mascot" class="mascot">
   </div>
