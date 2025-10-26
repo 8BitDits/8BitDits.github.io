@@ -74,6 +74,17 @@
     transform: scale(0.95);
   }
 
+
+  .code-stuff {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+
+
+
+
   @keyframes jump {
     0% { transform: translateY(0px); }
     50% { transform: translateY(10px); }
@@ -90,6 +101,7 @@
   </div>
 
   <div class="stats">
+
     <h1>Stats:</h1>
 
     <div class="music-stuff">
@@ -98,7 +110,6 @@
       <img src="music/idle-button.png" alt="MusicButton2" class="music-button" onclick="toggleMusic('song2')">
       <img src="music/idle-button.png" alt="MusicButton3" class="music-button" onclick="toggleMusic('song3')">
       <img src="music/idle-button.png" alt="MusicButton4" class="music-button" onclick="toggleMusic('song4')">
-    </div>
 
       <audio id="song1">
         <source src="music/test-song1.wav" type="audio/wav">
@@ -138,10 +149,14 @@
         };
       }
       </script>
+    </div>
 
-
-
+    <div class="code-stuff">
       <h2>Code:</h2>
+      <img src="music/idle-button.png" alt="MusicButton1" class="code-button">
+
+    </div>
+
       <h2>Art:</h2>
       <h2>Games:</h2>
   </div>
