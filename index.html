@@ -8,14 +8,15 @@
 <style>
 
   body {
-  background-color: #825f80;
-  color: black;
-  font-family: 'Georgia', Arial, sans-serif;
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch; /* make both columns fill same vertical height */
-  height: 100vh;
-  margin: 20px 40px;
+    image-rendering: pixelated;
+    background-color: #825f80;
+    color: black;
+    font-family: 'Georgia', Arial, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch; /* make both columns fill same vertical height */
+    height: 100vh;
+    margin: 20px 40px;
   }
 
   .character-images, .stats-text {
@@ -26,7 +27,6 @@
   }
 
   .character-images {
-    image-rendering: pixelated;
     align-items: flex-start;
     flex: 0 0 auto; /* keep its natural height only */
   }
@@ -67,11 +67,13 @@
   }
 
   .music-button:hover {
+    content: url("music/play-button.png");
     animation: float 0.3s ease-in-out;
   }
 
   .music-button:active {
-  transform: scale(0.8); /* shrinks slightly while pressed */
+    content: url("music/pause-button.png");
+    transform: scale(0.8); /* shrinks slightly while pressed */
   }
 
   @keyframes float {
@@ -100,8 +102,8 @@
 --->
     <div class="music-stuff">
       <h2>Music:</h2>
-      <img src="music/button1-placeholder.png" alt="Button1" class="music-button" onclick="toggleMusic('song1')">
-      <img src="music/button1-placeholder.png" alt="Button2" class="music-button" onclick="toggleMusic('song2')">
+      <img src="music/idle-button.png" alt="MusicButton1" class="music-button" onclick="toggleMusic('song1')">
+      <img src="music/idle-button.png" alt="MusicButton2" class="music-button" onclick="toggleMusic('song2')">
     </div>
 
       <audio id="song1">
