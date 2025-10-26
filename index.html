@@ -116,24 +116,35 @@
       <script>
       function toggleMusic(id) {
         const audio = document.getElementById(id);
+        const buttons = document.querySelectorAll('.music-button');
 
-        // Pause and reset all other audio tracks
+        // Pause and reset all other songs, reset their buttons to idle
         document.querySelectorAll('audio').forEach(a => {
           if (a.id !== id) {
             a.pause();
             a.currentTime = 0;
           }
         });
+        buttons.forEach(btn => btn.src = "music/idle-button.png");
 
-        // Then toggle the selected one
+        // Toggle the clicked song
+        const button = event.target;
         if (audio.paused) {
           audio.play();
+          button.src = "music/pause-button.png"; // Show pause image when playing
         } else {
           audio.pause();
           audio.currentTime = 0;
+          button.src = "music/idle-button.png"; // Back to idle image
         }
+
+        // When song ends, revert button automatically
+        audio.onended = () => {
+          button.src = "music/idle-button.png";
+        };
       }
       </script>
+
 
 
       <h2>Code:</h2>
