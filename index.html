@@ -35,7 +35,7 @@
   .stats-text {
     flex: 1 1 auto; /* take up remaining height in the column */
     justify-content: space-between; /* optional: space out the content vertically */
-    padding-left: 40px; /* optional: visual spacing between columns */
+  /*padding-left: 40px; */
     text-align: left;
   }
 
@@ -53,6 +53,18 @@
   }
 
 
+
+
+  .button1:hover {
+    animation: float 0.3s ease-in-out;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(20px); }
+    100% { transform: translateY(0px); }
+  }
+
 </style>
 
 </head>
@@ -66,7 +78,11 @@
 
   <div class="stats-text">
     <h1>Stats:</h1>
-      <h2>Music:</h2>
+      <div class= "music-stuff">
+        <h2>Music:</h2>
+        <img src="music/button1-placeholder.png" alt="Button1" class="button1">
+        <img src="music/button2-placeholder.png" alt="Button1" class="button2">
+      </div>
       <h2>Code:</h2>
       <h2>Art:</h2>
       <h2>Games:</h2>
