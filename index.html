@@ -6,14 +6,23 @@
   <title>8BitDits</title>
 
 <style>
+
   body {
     background-color: #825f80;
     color: black;
     font-family: 'Georgia', Arial, sans-serif;
     display: flex;
-    justify-content: space-between; /* Spread columns evenly */
+    justify-content: space-between; /* keeps the two columns apart */
+    align-items: flex-start; /* aligns content to the top */
     height: 100vh;
-    margin: 20px 40px 20px 40px;
+    margin: 20px 40px; /* this defines the outer spacing */
+    gap: 0; /* no space between columns */
+  }
+
+  .character-images,
+  .stats-text {
+    width: 50%; /* each column takes half the space */
+    box-sizing: border-box; /* include padding in width calculation */
   }
 
   .character-images {
@@ -37,9 +46,9 @@
   }
 
   .stats-text {
-    flex-direction: column;
     text-align: left;
   }
+
 </style>
 
 </head>
