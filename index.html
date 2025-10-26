@@ -52,13 +52,6 @@
     margin-top: -20px;
   }
 
-  .button1, .button2 {
-    width: 80px;    /* or any size you want */
-    height: auto;   /* keeps aspect ratio */
-    cursor: pointer; /* makes them feel clickable */
-    image-rendering: pixelated; /* keep that crisp 8-bit look */
-  }
-
 
   .music-stuff {
     margin-bottom: 5px;
@@ -69,6 +62,7 @@
   }
 
   .music-button:hover {
+    cursor: pointer;
     content: url("music/play-pause-button.png");
     animation: jump 0.3s ease-in-out;
   }
