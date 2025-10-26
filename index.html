@@ -66,10 +66,21 @@
   gap: 10px;
   }
 
+  .music-button {
+  width: 80px;
+  height: 80px;
+  background-image: url("music/idle-button.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  image-rendering: pixelated;
+  }
+
   .music-button:hover {
-    content: url("music/play-button.png");
+    background-image: url("music/play-button.png");
     animation: float 0.3s ease-in-out;
   }
+
 
   .music-button:active {
     transform: scale(0.8); /* shrinks slightly while pressed */
@@ -93,12 +104,6 @@
   <div class="stats">
     <h1>Stats:</h1>
 
-<!-- <div class= "music-stuff">
-        <h2>Music:</h2>
-        <img src="music/button1-placeholder.png" alt="Button1" class="button1">
-        <img src="music/button2-placeholder.png" alt="Button1" class="button2">
-      </div>
---->
     <div class="music-stuff">
       <h2>Music:</h2>
       <img src="music/idle-button.png" alt="MusicButton1" class="music-button" onclick="toggleMusic('song1')">
