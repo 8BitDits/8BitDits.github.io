@@ -8,46 +8,49 @@
 <style>
 
   body {
-    background-color: #825f80;
-    color: black;
-    font-family: 'Georgia', Arial, sans-serif;
-    display: flex;
-    justify-content: space-between; /* keeps the two columns apart */
-    align-items: flex-start; /* aligns content to the top */
-    height: 100vh;
-    margin: 20px 40px; /* this defines the outer spacing */
-    gap: 0; /* no space between columns */
+  background-color: #825f80;
+  color: black;
+  font-family: 'Georgia', Arial, sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch; /* make both columns fill same vertical height */
+  height: 100vh;
+  margin: 20px 40px;
   }
 
   .character-images,
   .stats-text {
-    width: 50%; /* each column takes half the space */
-    box-sizing: border-box; /* include padding in width calculation */
+    width: 50%;
+    box-sizing: border-box;
+    display: flex; /* allow internal flex behavior */
+    flex-direction: column;
   }
 
   .character-images {
     image-rendering: pixelated;
-    display: flex;
-    flex-direction: column;
     align-items: flex-start;
-    width: auto;
-  }
-
-  .flashing-name {
-      transform: scale(0.6);
-      transform-origin: top left;
-      margin-bottom: 10px;
-  }
-
-  .mascot {
-      transform: scale(1.6);
-      transform-origin: top left;
-      margin-top: -20px;
+    flex: 0 0 auto; /* keep its natural height only */
   }
 
   .stats-text {
+    flex: 1 1 auto; /* take up remaining height in the column */
+    justify-content: space-between; /* optional: space out the content vertically */
+    padding-left: 40px; /* optional: visual spacing between columns */
     text-align: left;
   }
+
+  .flashing-name {
+    transform: scale(0.6);
+    transform-origin: top left;
+    margin-bottom: 10px;
+  }
+
+  .mascot {
+    transform: scale(1.6);
+    transform-origin: top left;
+    margin-top: -20px;
+  }
+
 
 </style>
 
