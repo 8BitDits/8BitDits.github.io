@@ -67,18 +67,17 @@
   }
 
   .music-button:hover {
-    content: url("music/play-button.png");
-    animation: float 0.3s ease-in-out;
+    content: url("music/play-pause-button.png");
+    animation: jump 0.3s ease-in-out;
   }
-
 
   .music-button:active {
-    transform: scale(0.95); /* shrinks slightly while pressed */
+    transform: scale(0.95);
   }
 
-  @keyframes float {
+  @keyframes jump {
     0% { transform: translateY(0px); }
-    50% { transform: translateY(20px); }
+    50% { transform: translateY(10px); }
     100% { transform: translateY(0px); }
   }
 
@@ -125,7 +124,7 @@
         const button = event.target;
         if (audio.paused) {
           audio.play();
-          button.src = "music/pause-button.png"; // Show pause image when playing
+          button.src = "music/running-button.png"; // Show pause image when playing
         } else {
           audio.pause();
           audio.currentTime = 0;
