@@ -100,27 +100,28 @@
 --->
     <div class="music-stuff">
       <h2>Music:</h2>
-      <img src="music/button1-placeholder.png" alt="Play/Pause Button" class="button1"
-          onclick="toggleMusic()">
+      <img src="music/button1.png" alt="Play Song 1" onclick="toggleMusic('song1')">
+      <img src="music/button1.png" alt="Play Song 2" onclick="toggleMusic('song2')">
     </div>
 
-    <audio id="bgm">
-      <source src="music/test-song1.wav" type="audio/wav">
-      Your browser does not support the audio element.
-    </audio>
+      <audio id="song1">
+        <source src="music/test-song1.wav" type="audio/wav">
+      </audio>
+      <audio id="song2">
+        <source src="music/test-song2.wav" type="audio/wav">
+      </audio>
 
-    <script>
-      const audio = document.getElementById('bgm');
-
-      function toggleMusic() {
+      <script>
+      function toggleMusic(id) {
+        const audio = document.getElementById(id);
         if (audio.paused) {
           audio.play();
         } else {
           audio.pause();
-          audio.currentTime = 0; // optional: reset to start
+          audio.currentTime = 0;
         }
       }
-    </script>
+      </script>
 
       <h2>Code:</h2>
       <h2>Art:</h2>
