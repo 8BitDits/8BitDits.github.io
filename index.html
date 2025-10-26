@@ -116,6 +116,16 @@
       <script>
       function toggleMusic(id) {
         const audio = document.getElementById(id);
+
+        // Pause and reset all other audio tracks
+        document.querySelectorAll('audio').forEach(a => {
+          if (a.id !== id) {
+            a.pause();
+            a.currentTime = 0;
+          }
+        });
+
+        // Then toggle the selected one
         if (audio.paused) {
           audio.play();
         } else {
@@ -124,6 +134,7 @@
         }
       }
       </script>
+
 
       <h2>Code:</h2>
       <h2>Art:</h2>
