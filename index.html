@@ -27,6 +27,7 @@
   }
 
   .character-images {
+    animation: dropDown 1s ease normal 1;
     align-items: flex-start;
     flex: 0 0 auto; /* keep its natural height only */
   }
@@ -100,6 +101,11 @@
     0% { opacity: 0; transform: translate(25px, 0px); }
     100% { opacity: 1; transform: translate(0px, 0px); }
   }
+
+  @keyframes dropDown {
+  0% { opacity: 1; transform: translateY(-25px); }
+  100% {opacity: 1; transform: translateY(0); }
+}
 
 </style>
 </head>
