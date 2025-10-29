@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>8BitDits</title>
-
+  <link rel="icon" href="music/play-pause-button.png" type="image/png"/>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 
 
@@ -18,7 +18,8 @@
     display: flex;
     justify-content: space-between;
     align-items: stretch; /* make both columns fill same vertical height */
-    height: 100vh;
+/*    height: 100vh; 
+commenting out for now because idk if i want the scrollbar on the sides (full viewport height+extra margins = scrollbar) */
     margin: 20px 40px;
   }
 
@@ -70,6 +71,12 @@
     gap: 2px;
     animation: fadeRight 1.5s ease normal 1;
   }
+
+  .music-stuff h2 {
+    color: black;
+  }
+
+
 
   .music-button:hover {
     cursor: pointer;
@@ -144,7 +151,11 @@
     <h1>Stats:</h1>
 
     <div class="music-stuff">
-      <h2>Music:</h2>
+
+      <a href="music.html">
+        <h2>Music:</h2>
+      </a>
+
       <img src="music/idle-button.png" alt="MusicButton1" class="music-button" onclick="toggleMusic('song1')">
       <img src="music/idle-button.png" alt="MusicButton2" class="music-button" onclick="toggleMusic('song2')">
       <img src="music/idle-button.png" alt="MusicButton3" class="music-button" onclick="toggleMusic('song3')">
