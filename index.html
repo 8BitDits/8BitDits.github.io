@@ -18,23 +18,21 @@
     display: flex;
     justify-content: space-between;
     align-items: stretch; /* make both columns fill same vertical height */
-/*    height: 100vh; 
+/*  height: 100vh; 
 commenting out for now because idk if i want the scrollbar on the sides (full viewport height+extra margins = scrollbar) */
     margin: 20px 40px;
   }
 
-  .character-images, .stats-text {
+  .character-images {
     width: 50%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-  }
-
-  .character-images {
     animation: dropDown 1.4s ease normal 1;
     align-items: flex-start;
     flex: 0 0 auto; /* keep its natural height only */
   }
+
 
   .stats {
     flex: 1 1 auto; /* take up remaining height in the column */
@@ -76,8 +74,6 @@ commenting out for now because idk if i want the scrollbar on the sides (full vi
     color: black;
   }
 
-
-
   .music-button:hover {
     cursor: pointer;
     content: url("music/play-pause-button.png");
@@ -87,7 +83,6 @@ commenting out for now because idk if i want the scrollbar on the sides (full vi
   .music-button:active {
     transform: scale(0.95);
   }
-
 
   .code-stuff {
     margin-top: 5px;
@@ -119,8 +114,6 @@ commenting out for now because idk if i want the scrollbar on the sides (full vi
 
 
 
-
-
   @keyframes jump {
     0% { transform: translateY(0px); }
     50% { transform: translateY(10px); }
@@ -135,7 +128,18 @@ commenting out for now because idk if i want the scrollbar on the sides (full vi
   @keyframes dropDown {
   0% { opacity: 1; transform: translateY(-125px); }
   100% {opacity: 1; transform: translateY(0); }
-}
+  }
+
+
+  @media (orientation: portrait) {
+    body {
+      flex-direction: column;
+    }
+  }
+
+
+
+
 
 </style>
 </head>
