@@ -7,7 +7,6 @@
   <link rel="icon" href="music/play-pause-button.png" type="image/png"/>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 
-
 <style>
 
   body {
@@ -18,8 +17,6 @@
     display: flex;
     justify-content: space-between;
     align-items: stretch; /* make both columns fill same vertical height */
-/*  height: 100vh; 
-commenting out for now because idk if i want the scrollbar on the sides (full viewport height+extra margins = scrollbar) */
     margin: 20px 40px;
   }
 
@@ -69,6 +66,7 @@ commenting out for now because idk if i want the scrollbar on the sides (full vi
     animation: fadeRight 1.5s ease normal 1;
   }
 
+  /*text for music page link*/
   .music-stuff h2 {
     color: black;
   }
@@ -90,6 +88,11 @@ commenting out for now because idk if i want the scrollbar on the sides (full vi
     align-items: center;
     gap: 2px;
     animation: fadeRight 2s ease normal 1;
+  }
+
+  /*text for code page link*/
+  .code-stuff h2 {
+    color: black;
   }
 
   .art-stuff {
@@ -205,7 +208,11 @@ commenting out for now because idk if i want the scrollbar on the sides (full vi
     </div>
 
     <div class="code-stuff">
-      <h2>Code:</h2>
+
+      <a href="code.html">
+        <h2>Code:</h2>
+      </a>
+
       <img src="music/idle-button.png" alt="CodeButton1" class="code-button">
 
     </div>
