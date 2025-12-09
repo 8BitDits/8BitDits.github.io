@@ -9,15 +9,39 @@
 
 <style>
 
-    body {
-        image-rendering: pixelated;
-        background-color: #825f80;
-        color: black;
-        font-family: 'VT323', monospace;
-        display: flex;
-        justify-content: space-between;
-        margin: 20px 40px;
-    }
+  body {
+    image-rendering: pixelated;
+    background-color: #825f80;
+    color: black;
+    font-family: 'VT323', monospace;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 40px;
+  }
+
+
+  .music-stuff {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    animation: fadeRight 1.5s ease normal 1;
+  }
+
+  /*text for music page link*/
+  .music-stuff h2 {
+    color: black;
+  }
+
+  .music-button:hover {
+    cursor: pointer;
+    content: url("music/play-pause-button.png");
+    animation: jump 0.3s ease-in-out;
+  }
+
+  .music-button:active {
+    transform: scale(0.95);
+  }
 
 
 
@@ -26,9 +50,54 @@
 </head>
 
 <body>
-    <div class="music-text">
+  <div class="music-text">
 
-        <p>bring over the music bar thing here, show music software and photos of studio. Extra steezy</p>
+    <img src="music/idle-button.png" alt="MusicButton1" class="music-button" onclick="toggleMusic('song1')">
+    <img src="music/idle-button.png" alt="MusicButton2" class="music-button" onclick="toggleMusic('song2')">
+    <img src="music/idle-button.png" alt="MusicButton3" class="music-button" onclick="toggleMusic('song3')">
+    <img src="music/idle-button.png" alt="MusicButton4" class="music-button" onclick="toggleMusic('song4')">
+
+    <audio id="song1">
+      <source src="music/test-song1.wav" type="audio/wav">
+    </audio>
+    <audio id="song2">
+      <source src="music/test-song2.wav" type="audio/wav">
+    </audio>  
+
+    <p>bring over the music bar thing here, show music software and photos of studio. Extra steezy</p>
+
+
+    <script>
+      function toggleMusic(id) {
+        const audio = document.getElementById(id);
+        const buttons = document.querySelectorAll('.music-button');
+
+        // Pause and reset all other songs, reset their buttons to idle
+        document.querySelectorAll('audio').forEach(a => {
+          if (a.id !== id) {
+            a.pause();
+            a.currentTime = 0;
+          }
+        });
+        buttons.forEach(btn => btn.src = "music/idle-button.png");
+
+        // Toggle the clicked song
+        const button = event.target;
+        if (audio.paused) {
+          audio.play();
+          button.src = "music/running-button.png"; // Show pause image when playing
+        } else {
+          audio.pause();
+          audio.currentTime = 0;
+          button.src = "music/idle-button.png"; // Back to idle image
+        }
+
+        // When song ends, revert button automatically
+        audio.onended = () => {
+          button.src = "music/idle-button.png";
+        };
+      }
+      </script>
 
     </div>
 

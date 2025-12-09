@@ -71,16 +71,6 @@
     color: black;
   }
 
-  .music-button:hover {
-    cursor: pointer;
-    content: url("music/play-pause-button.png");
-    animation: jump 0.3s ease-in-out;
-  }
-
-  .music-button:active {
-    transform: scale(0.95);
-  }
-
   .code-stuff {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -90,7 +80,6 @@
     animation: fadeRight 2s ease normal 1;
   }
 
-  /*text for code page link*/
   .code-stuff h2 {
     color: black;
   }
@@ -160,51 +149,9 @@
 
       <a href="music.html">
         <h2>Music:</h2>
+        <!-- moved music buttons to music.html page -->
       </a>
 
-      <img src="music/idle-button.png" alt="MusicButton1" class="music-button" onclick="toggleMusic('song1')">
-      <img src="music/idle-button.png" alt="MusicButton2" class="music-button" onclick="toggleMusic('song2')">
-      <img src="music/idle-button.png" alt="MusicButton3" class="music-button" onclick="toggleMusic('song3')">
-      <img src="music/idle-button.png" alt="MusicButton4" class="music-button" onclick="toggleMusic('song4')">
-
-      <audio id="song1">
-        <source src="music/test-song1.wav" type="audio/wav">
-      </audio>
-      <audio id="song2">
-        <source src="music/test-song2.wav" type="audio/wav">
-      </audio>
-
-      <script>
-      function toggleMusic(id) {
-        const audio = document.getElementById(id);
-        const buttons = document.querySelectorAll('.music-button');
-
-        // Pause and reset all other songs, reset their buttons to idle
-        document.querySelectorAll('audio').forEach(a => {
-          if (a.id !== id) {
-            a.pause();
-            a.currentTime = 0;
-          }
-        });
-        buttons.forEach(btn => btn.src = "music/idle-button.png");
-
-        // Toggle the clicked song
-        const button = event.target;
-        if (audio.paused) {
-          audio.play();
-          button.src = "music/running-button.png"; // Show pause image when playing
-        } else {
-          audio.pause();
-          audio.currentTime = 0;
-          button.src = "music/idle-button.png"; // Back to idle image
-        }
-
-        // When song ends, revert button automatically
-        audio.onended = () => {
-          button.src = "music/idle-button.png";
-        };
-      }
-      </script>
     </div>
 
     <div class="code-stuff">
