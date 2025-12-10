@@ -6,6 +6,7 @@
   <title>8BitDits</title>
   <link rel="icon" href="music/play-pause-button.png" type="image/png"/>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+</head>
 
 <style>
 
@@ -43,7 +44,6 @@
     margin: 0;
   }
 
-
   .flashing-name {
     transform: scale(0.6);
     transform-origin: top left;
@@ -58,50 +58,10 @@
   }
 
 
-  .music-stuff {
-    margin-bottom: 5px;
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    animation: fadeRight 1.5s ease normal 1;
-  }
-
-  /*text for music page link*/
-  .music-stuff h2 {
+  /*text for links (defaults to purple or smth)*/
+  h2 {
     color: black;
   }
-
-  .code-stuff {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    animation: fadeRight 2s ease normal 1;
-  }
-
-  .code-stuff h2 {
-    color: black;
-  }
-
-  .art-stuff {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    animation: fadeRight 2.5s ease normal 1;
-  }
-
-  .games-stuff {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    animation: fadeRight 3s ease normal 1;
-  }
-
 
 
 
@@ -133,7 +93,6 @@
 
 
 </style>
-</head>
 <body>
 
   <div class="character-images">
@@ -148,8 +107,7 @@
     <div class="music-stuff">
 
       <a href="music.html">
-        <h2>Music:</h2>
-        <!-- moved music buttons to music.html page -->
+        <h2>Music</h2>
       </a>
 
     </div>
@@ -157,22 +115,24 @@
     <div class="code-stuff">
 
       <a href="code.html">
-        <h2>Code:</h2>
+        <h2>Code</h2>
       </a>
-
-      <img src="music/idle-button.png" alt="CodeButton1" class="code-button">
 
     </div>
 
     <div class="art-stuff">
-      <h2>Art:</h2>
-      <img src="music/idle-button.png" alt="ArtButton1" class="art-button">
+
+      <a href="art.html">
+        <h2>Art</h2>
+      </a>
 
     </div>
 
     <div class="games-stuff">
-      <h2>Games:</h2>
-      <img src="music/idle-button.png" alt="GameButton1" class="game-button">
+
+      <a href="games.html">
+        <h2>Games</h2>
+      </a>
 
     </div>
   </div>
