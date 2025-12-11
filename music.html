@@ -24,19 +24,31 @@
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 999;           /* Bring to the front */
+    z-index: 1;           /* Bring to the front */
     background: #cfa9cc;
     width: 100%;
     text-align: center;
-    padding: 15px 0;
+    padding: 0px 0;
     border-bottom: 4px solid #000;
   }
 
+  .jukebox-image {
+    display: block;
+    margin: 20px auto 0 auto;
+  }
+
+
   .music-text {
-    margin-top: 120px;      /* Push down so it doesn’t hide behind jukebox */
+    margin-top: 220px;      /* keep space for the fixed header */
     text-align: center;
-    z-index: 1;
-    position: relative;
+    position: relative;     /* needed for z-index */
+    z-index: 10;            /* higher than background, lower than jukebox if needed */
+  }
+
+
+  .music-image {
+    display: block;
+    margin: 0 auto 20px auto;  /* center horizontally + spacing below */
   }
 
 
@@ -67,8 +79,9 @@
 <body>
 
   <div class= "jukebox">
-    <h2>Jukebox here</h2>
+    <img src="images/8bitdits-jukebox.png" class="jukebox-image" alt="JukeboxImage">
   </div>
+
 
   <div class="music-text">
     <!-------COMMENTING OUT WHILE SETTING UP JUKEBOX-----
@@ -84,6 +97,9 @@
       <source src="music/test-song2.wav" type="audio/wav">
     </audio>  
     --->
+    
+      <img src="music/idle-button.png" class="music-image" alt="MusicImagePlaceholder">
+
 
 
     
