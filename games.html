@@ -1,27 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>8BitDits Games</title>
-  <link rel="icon" href="music/play-pause-button.png" type="image/png"/>
-  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-</head>  
+<meta charset="UTF-8">
+<title>True Drag and Drop</title>
 
 <style>
-
+  /* Make the page fill the viewport so mouse events work anywhere */
   body {
     image-rendering: pixelated;
     background-color: #825f80;
     color: black;
     font-family: 'VT323', monospace;
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 40px;
+    margin: 0;
+    padding: 0;
   }
 
+  /* The draggable image */
+  #dragItem {
+    width: 150px;
+
+    /* Absolute positioning lets us move it freely with left/top */
+    position: absolute;
+    left: 50px;
+    top: 50px;
+
+    /* Visual cue that this can be grabbed */
+    cursor: grab;
+
+    /* Prevent text/image selection while dragging */
+    user-select: none;
+  }
+
+  /* The drop target container */
+  #dropTarget {
+    position: absolute;
+    left: 350px;
+    top: 100px;
+
+    width: 180px;
+    height: 180px;
+
+    /* Visible outline so we know where to drop */
+    border: 2px dashed #888;
+
+    /* Center the image inside */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Drop target image */
+  #dropTarget img {
+    width: 150px;
+
+    /* Allows mouse events to pass through to the container */
+    pointer-events: none;
+  }
 </style>
+</head>
 
+<body>
 
+<!-- The item we will drag -->
+<img
+  id="dragItem"
+  src="music/button1-placeholder.png"
+  draggable="false"  <!-- disable native browser drag -->
+>
+
+<!-- The area we drop onto -->
+<div id="dropTarget">
+  <img src="music/button2-placeholder.png">
+</div>
+
+<script>
+  /* Grab references to the elements */
+  const dragItem = document.getElementById("dragItem");
+  const dropTarget = document.getElementById("dropTarget");
+
+  /* Track drag state */
+  let isDragging = false;
+
+  /* Offset between mouse position and top-left of image */
+  let offsetX = 0;
+  let offsetY = 0;
+
+  /* When the mouse button is pressed on the image */
+  dragItem.addEventListener("mousedown", (e) => {
+    /* Prevent browser's default drag behavior */
+    e.preventDefault();
+
+    /* Start dragging */
+    isDragging = true;
+
+    /* Change cursor for feedback */
+    dragItem.style.cursor = "grabbing";
+
+    /* Store where inside the image we clicked */
+    offsetX = e.clientX - dragItem.offsetLeft;
+    offsetY = e.clientY - dragItem.offsetTop;
+  });
+
+  /* When the mouse moves anywhere on the page */
+  document.addEventListener("mousemove", (e) => {
+    /* Only move if currently dragging */
+    if (!isDragging) return;
+
+    /* Move the image so it follows the cursor */
+    dragItem.style.left = (e.clientX - offsetX) + "px";
+    dragItem.style.top  = (e.clientY - offsetY) + "px";
+  });
+
+  /* When the mouse button is released */
+  document.addEventListener("mouseup", () => {
+    /* If we weren't dragging, do nothing */
+    if (!isDragging) return;
+
+    /* Stop dragging */
+    isDragging = false;
+    dragItem.style.cursor = "grab";
+
+    /* Get the screen positions of the dragged item and drop target */
+    const dragRect = dragItem.getBoundingClientRect();
+    const dropRect = dropTarget.getBoundingClientRect();
+
+    /* Check if the two rectangles overlap */
+    const isOver =
+      dragRect.right  > dropRect.left &&
+      dragRect.left   < dropRect.right &&
+      dragRect.bottom > dropRect.top &&
+      dragRect.top    < dropRect.bottom;
+
+    /* If dropped on target, redirect */
+    if (isOver) {
+      window.location.href = "music.html";
+    }
+  });
+</script>
+
+</body>
 </html>
-
