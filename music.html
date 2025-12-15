@@ -6,146 +6,160 @@
   <title>8BitDits Music</title>
   <link rel="icon" href="music/play-pause-button.png" type="image/png"/>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-</head>  
+  <style>
+    body {
+      image-rendering: pixelated;
+      background-color: #825f80;
+      color: black;
+      font-family: 'VT323', monospace;
+      margin: 0;
+      padding: 0;
+    }
 
-<style>
+    .jukebox {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      background: #cfa9cc;
+      width: 100%;
+      text-align: center;
+      padding: 0px 0;
+      border-bottom: 4px solid #000;
+    }
+    .jukebox-image {
+      display: block;
+      margin: 20px auto 0 auto;
+      pointer-events: none;
+    }
 
-  body {
-    image-rendering: pixelated;
-    background-color: #825f80;
-    color: black;
-    font-family: 'VT323', monospace;
-    margin: 0;
-    padding: 0;
-  }
+    .music-image {
+      width: 150px;
+      cursor: grab;
+      user-select: none;
+      position: absolute;
+    }
 
-  .jukebox {
-    position: fixed;        /* Float above everything */
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;           /* Bring to the front */
-    background: #cfa9cc;
-    width: 100%;
-    text-align: center;
-    padding: 0px 0;
-    border-bottom: 4px solid #000;
-  }
+    #dragItem { left: 50px; top: 250px; }
+    #dragItem2 { left: 50px; top: 450px; }
 
-  .jukebox-image {
-    display: block;
-    margin: 20px auto 0 auto;
-  }
-
-
-  .music-text {
-    margin-top: 220px;      /* keep space for the fixed header */
-    text-align: center;
-    position: relative;     /* needed for z-index */
-    z-index: 10;            /* higher than background, lower than jukebox if needed */
-  }
-
-
-  .music-image {
-    display: block;
-    margin: 0 auto 20px auto;  /* center horizontally + spacing below */
-  }
-
-
-  /*----COMMENTING OUT WHILE SETTING UP JUKEBOX----/
-  .music-stuff {
-    margin-bottom: 5px;
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    animation: fadeRight 1.5s ease normal 1;
-  }
-
-  .music-button:hover {
-    cursor: pointer;
-    content: url("music/play-pause-button.png");
-    animation: jump 0.3s ease-in-out;
-  }
-
-  .music-button:active {
-    transform: scale(0.95);
-  }
-  */
-
-
-
-</style>
-
+    #dropTarget {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+  </style>
+</head>
 <body>
 
-  <div class= "jukebox">
+  <!-- Jukebox Header -->
+  <div class="jukebox" id="dropTarget">
     <img src="images/8bitdits-jukebox.png" class="jukebox-image" alt="JukeboxImage">
   </div>
 
+  <!-- Music Buttons -->
+  <img src="music/idle-button.png" class="music-image" id="dragItem" alt="MusicButton1" draggable="false">
+  <img src="music/idle-button.png" class="music-image" id="dragItem2" alt="MusicButton2" draggable="false">
 
-  <div class="music-text">
-    <!-------COMMENTING OUT WHILE SETTING UP JUKEBOX-----
-    <img src="music/idle-button.png" alt="MusicButton1" class="music-button" onclick="toggleMusic('song1')">
-    <img src="music/idle-button.png" alt="MusicButton2" class="music-button" onclick="toggleMusic('song2')">
-    <img src="music/idle-button.png" alt="MusicButton3" class="music-button" onclick="toggleMusic('song3')">
-    <img src="music/idle-button.png" alt="MusicButton4" class="music-button" onclick="toggleMusic('song4')">
+  <!-- Text -->
+  <div class="image 1 text">
+    <p style="position: absolute; left: 220px; top: 290px; font-size: 20px;">Test Song 1</p>
+  </div>
 
-    <audio id="song1">
-      <source src="music/test-song1.wav" type="audio/wav">
-    </audio>
-    <audio id="song2">
-      <source src="music/test-song2.wav" type="audio/wav">
-    </audio>  
-    --->
-    
-      <img src="music/idle-button.png" class="music-image" alt="MusicImagePlaceholder">
+  <div class="image 2 text">
+    <p style="position: absolute; left: 220px; top: 490px; font-size: 20px;">Test Song 2</p>
+  </div>
 
 
+  <!-- Audio Elements -->
+  <audio id="song1">
+    <source src="music/test-song1.wav" type="audio/wav">
+  </audio>
+  <audio id="song2">
+    <source src="music/test-song2.wav" type="audio/wav">
+  </audio>
 
-    
+  <script>
+    const dropTarget = document.getElementById("dropTarget");
+    const allButtons = [
+      { button: document.getElementById("dragItem"), song: document.getElementById("song1") },
+      { button: document.getElementById("dragItem2"), song: document.getElementById("song2") }
+    ];
 
+    function makeDraggable(dragItem, song) {
+      let isDragging = false;
+      let offsetX = 0;
+      let offsetY = 0;
 
-    <p>bring over the music bar thing here, show music software and photos of studio. Extra steezy</p>
+      const startLeft = dragItem.offsetLeft;
+      const startTop = dragItem.offsetTop;
 
+      dragItem.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        isDragging = true;
+        dragItem.style.cursor = "grabbing";
 
-    <script>
-      /*----COMMENTING OUT, SETTING UP JUKEBOX----/
-      function toggleMusic(id) {
-        const audio = document.getElementById(id);
-        const buttons = document.querySelectorAll('.music-button');
+        offsetX = e.clientX - dragItem.offsetLeft;
+        offsetY = e.clientY - dragItem.offsetTop;
+      });
 
-        // Pause and reset all other songs, reset their buttons to idle
-        document.querySelectorAll('audio').forEach(a => {
-          if (a.id !== id) {
-            a.pause();
-            a.currentTime = 0;
-          }
-        });
-        buttons.forEach(btn => btn.src = "music/idle-button.png");
+      document.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        dragItem.style.left = (e.clientX - offsetX) + "px";
+        dragItem.style.top  = (e.clientY - offsetY) + "px";
+      });
 
-        // Toggle the clicked song
-        const button = event.target;
-        if (audio.paused) {
-          audio.play();
-          button.src = "music/running-button.png"; // Show pause image when playing
-        } else {
-          audio.pause();
-          audio.currentTime = 0;
-          button.src = "music/idle-button.png"; // Back to idle image
+      document.addEventListener("mouseup", () => {
+        if (!isDragging) return;
+        isDragging = false;
+        dragItem.style.cursor = "grab";
+
+        const dragRect = dragItem.getBoundingClientRect();
+        const dropRect = dropTarget.getBoundingClientRect();
+
+        const isOver =
+          dragRect.right  > dropRect.left &&
+          dragRect.left   < dropRect.right &&
+          dragRect.bottom > dropRect.top &&
+          dragRect.top    < dropRect.bottom;
+
+        if (isOver) {
+          // Stop all other songs and reset their buttons
+          allButtons.forEach(item => {
+            if (item.song !== song) {
+              item.song.pause();
+              item.song.currentTime = 0;
+              item.button.src = "music/idle-button.png";
+            }
+          });
+
+          // Play selected song
+          song.currentTime = 0;
+          song.play();
+
+          // Set this button to running
+          dragItem.src = "music/running-button.png";
+
+          // Reset to idle when song ends
+          song.onended = () => {
+            dragItem.src = "music/idle-button.png";
+          };
         }
 
-        // When song ends, revert button automatically
-        audio.onended = () => {
-          button.src = "music/idle-button.png";
-        };
-      }
+        // Reset button position
+        dragItem.style.left = startLeft + "px";
+        dragItem.style.top  = startTop + "px";
+      });
+    }
 
-      */
-    </script>
+    // Initialize draggable buttons
+    allButtons.forEach(item => makeDraggable(item.button, item.song));
+  </script>
 
-    </div>
-
-    
 </body>
-
 </html>
