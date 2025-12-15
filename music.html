@@ -27,7 +27,9 @@
       text-align: center;
       padding: 0px 0;
       border-bottom: 4px solid #000;
+      cursor: pointer; /* show clickable */
     }
+
     .jukebox-image {
       display: block;
       margin: 20px auto 0 auto;
@@ -51,8 +53,17 @@
       transform: translateX(-50%);
       width: 100%;
       z-index: 1;
-      pointer-events: none;
+      pointer-events: auto; /* allow clicks */
     }
+
+    .song-label {
+      position: absolute;
+      font-size: 20px;
+      color: black;
+    }
+
+    #label1 { left: 220px; top: 290px; }
+    #label2 { left: 220px; top: 490px; }
   </style>
 </head>
 <body>
@@ -63,18 +74,14 @@
   </div>
 
   <!-- Music Buttons -->
-  <img src="music/idle-button.png" class="music-image" id="dragItem" alt="MusicButton1" draggable="false">
-  <img src="music/idle-button.png" class="music-image" id="dragItem2" alt="MusicButton2" draggable="false">
+    <!-- disc 1 -->
+  <img src="music/8BD CD website.png" class="music-image" id="dragItem" alt="MusicButton1" draggable="false">
+    <!-- disc 2 -->
+  <img src="music/8BD CD website.png" class="music-image" id="dragItem2" alt="MusicButton2" draggable="false">
 
-  <!-- Text -->
-  <div class="image 1 text">
-    <p style="position: absolute; left: 220px; top: 290px; font-size: 20px;">Test Song 1</p>
-  </div>
-
-  <div class="image 2 text">
-    <p style="position: absolute; left: 220px; top: 490px; font-size: 20px;">Test Song 2</p>
-  </div>
-
+  <!-- Labels -->
+  <p id="label1" class="song-label">Test Song 1</p>
+  <p id="label2" class="song-label">Test Song 2</p>
 
   <!-- Audio Elements -->
   <audio id="song1">
@@ -90,6 +97,9 @@
       { button: document.getElementById("dragItem"), song: document.getElementById("song1") },
       { button: document.getElementById("dragItem2"), song: document.getElementById("song2") }
     ];
+
+    let currentSong = null;
+    let currentButton = null;
 
     function makeDraggable(dragItem, song) {
       let isDragging = false;
@@ -129,25 +139,29 @@
           dragRect.top    < dropRect.bottom;
 
         if (isOver) {
-          // Stop all other songs and reset their buttons
+          // Stop other songs
           allButtons.forEach(item => {
             if (item.song !== song) {
               item.song.pause();
               item.song.currentTime = 0;
-              item.button.src = "music/idle-button.png";
+              item.button.src = "music/8BD CD website.png";
             }
           });
 
           // Play selected song
           song.currentTime = 0;
           song.play();
+          dragItem.src = "music/8BD CD empty website.png";
 
-          // Set this button to running
-          dragItem.src = "music/running-button.png";
+          currentSong = song;
+          currentButton = dragItem;
 
-          // Reset to idle when song ends
           song.onended = () => {
-            dragItem.src = "music/idle-button.png";
+            dragItem.src = "music/8BD CD empty website.png";
+            if (currentSong === song) {
+              currentSong = null;
+              currentButton = null;
+            }
           };
         }
 
@@ -159,6 +173,19 @@
 
     // Initialize draggable buttons
     allButtons.forEach(item => makeDraggable(item.button, item.song));
+
+    // Jukebox toggle play/pause
+    dropTarget.addEventListener("click", () => {
+      if (currentSong) {
+        if (!currentSong.paused) {
+          currentSong.pause();
+          currentButton.src = "music/8BD CD website.png";
+        } else {
+          currentSong.play();
+          currentButton.src = "music/8BD CD empty website.png";
+        }
+      }
+    });
   </script>
 
 </body>
