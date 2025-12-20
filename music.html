@@ -6,7 +6,6 @@
   <title>8BitDits Music</title>
   <link rel="icon" href="music/play-pause-button.png" type="image/png"/>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-
   <style>
     body {
       image-rendering: pixelated;
@@ -19,7 +18,7 @@
 
     /* Jukebox Header */
     .jukebox {
-      position: absolute; /* CHANGED */
+      position: fixed;
       top: 0;
       left: 50%;
       transform: translateX(-50%);
@@ -27,6 +26,7 @@
       background: #cfa9cc;
       width: 100%;
       text-align: center;
+      padding: 0px 0;
       border-bottom: 4px solid #000;
       cursor: pointer;
     }
@@ -37,22 +37,32 @@
       pointer-events: none;
     }
 
-    /* Volume slider */
+    /* Volume slider container */
     #volumeContainer {
-      position: absolute; /* CHANGED */
+      position: fixed;
       top: 140px;
       right: 20%;
-      transform: translateX(50%);
+      transform: translateX(-50%);
+      z-index: 2;
       text-align: center;
     }
 
     #volumeControl {
-      -webkit-appearance: none;
-      width: 200px;
-      height: 10px;
-      background: #a883a5;
+    -webkit-appearance: none;  /* remove default styling */
+    width: 200px;
+    height: 10px;
+    background: #a883a5;          /* track background */
+    border-radius: 0px;
+    margin-top: 0px;
     }
 
+    /* Filled part of the slider (Webkit browsers) */
+    #volumeControl::-webkit-slider-runnable-track {
+      height: 10px;
+      border-radius: 0px;
+    }
+
+    /* The thumb */
     #volumeControl::-webkit-slider-thumb {
       appearance: none;
       width: 20px;
@@ -61,10 +71,10 @@
       border-radius: 50%;
       cursor: pointer;
       border: 2px solid black;
-      margin-top: -5px;
+      margin-top: -5px; /* center thumb on track */
     }
 
-    /* Music discs */
+    /* Music disc images (left) */
     .music-disc-image {
       width: 150px;
       left: 30vw;
@@ -72,80 +82,202 @@
       user-select: none;
       position: absolute;
     }
-
-    #dragItem { top: 250px; }
+    /* adjust heights of discs */
+    #dragItem { top: 250px;}
     #dragItem2 { top: 450px; }
-    #dragItem3 { top: 650px; }
+    #dragItem3 { top: 650px;}
     #dragItem4 { top: 850px; }
 
-    /* Music pictures */
+    /* Music images (right) */
     .music-picture {
-      position: absolute; /* CHANGED */
+      position: fixed;
       width: 300px;
       border: 4px solid black;
       right: 20vw;
     }
-
+    /* adjust heights of music pics */
     #musicPic1 { top: 250px; }
     #musicPic2 { top: 450px; }
     #musicPic3 { top: 650px; }
     #musicPic4 { top: 850px; }
 
     #dropTarget {
-      position: absolute; /* CHANGED */
+      position: fixed;
       top: 0;
       left: 50%;
       transform: translateX(-50%);
       width: 100%;
       z-index: 1;
+      pointer-events: auto;
     }
 
-    /* Labels */
+    /* Labels (centered between left and right) */
     .song-label {
-      position: absolute; /* CHANGED */
+      position: fixed;
       font-size: 20px;
+      color: black;
+      font-family: 'VT323', monospace;
       width: 300px;
       text-align: center;
       left: 50%;
       transform: translateX(-50%);
     }
-
+    /* adjust heights of disc labels */
     #label1 { top: 300px; }
     #label2 { top: 500px; }
     #label3 { top: 700px; }
     #label4 { top: 900px; }
-
+    
   </style>
 </head>
-
 <body>
 
+  <!-- Jukebox Header -->
   <div class="jukebox" id="dropTarget">
-    <img src="images/8bitdits-jukebox.png" class="jukebox-image">
+    <img src="images/8bitdits-jukebox.png" class="jukebox-image" alt="JukeboxImage">
   </div>
 
-  <img src="music/8BD CD website.png" class="music-disc-image" id="dragItem">
-  <img src="music/8BD CD website.png" class="music-disc-image" id="dragItem2">
-  <img src="music/8BD CD website.png" class="music-disc-image" id="dragItem3">
-  <img src="music/8BD CD website.png" class="music-disc-image" id="dragItem4">
+  <!-- Music Discs (left) -->
+  <img src="music/8BD CD website.png" class="music-disc-image" id="dragItem" alt="MusicButton1" draggable="false">
+  <img src="music/8BD CD website.png" class="music-disc-image" id="dragItem2" alt="MusicButton2" draggable="false">
+  <img src="music/8BD CD website.png" class="music-disc-image" id="dragItem3" alt="MusicButton3" draggable="false">
+  <img src="music/8BD CD website.png" class="music-disc-image" id="dragItem4" alt="MusicButton4" draggable="false">
 
+  <!-- Music Images (right) -->
   <img src="music/demo pic.png" class="music-picture" id="musicPic1">
   <img src="music/demo pic.png" class="music-picture" id="musicPic2">
   <img src="music/demo pic.png" class="music-picture" id="musicPic3">
   <img src="music/demo pic.png" class="music-picture" id="musicPic4">
 
+  <!-- Labels (centered) -->
   <p id="label1" class="song-label">Description for Song 1</p>
   <p id="label2" class="song-label">Description for Song 2</p>
   <p id="label3" class="song-label">Description for Song 3</p>
   <p id="label4" class="song-label">Description for Song 4</p>
 
-  <audio id="song1"><source src="music/test-song1.wav"></audio>
-  <audio id="song2"><source src="music/test-song2.wav"></audio>
+  <!-- Audio Elements -->
+  <audio id="song1">
+    <source src="music/test-song1.wav" type="audio/wav">
+  </audio>
+  <audio id="song2">
+    <source src="music/test-song2.wav" type="audio/wav">
+  </audio>
+  <audio id="song3">
+    <source src="music/test-song1.wav" type="audio/wav">
+  </audio>
+  <audio id="song4">
+    <source src="music/test-song2.wav" type="audio/wav">
+  </audio>
 
+  <!-- Volume Slider -->
   <div id="volumeContainer">
-    <label>Volume</label><br>
+    <label for="volumeControl">Volume</label><br>
     <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.5">
   </div>
+
+  <script>
+    const dropTarget = document.getElementById("dropTarget");
+    const allButtons = [
+      { button: document.getElementById("dragItem"), song: document.getElementById("song1") },
+      { button: document.getElementById("dragItem2"), song: document.getElementById("song2") }
+    ];
+
+    let currentSong = null;
+    let currentButton = null;
+    const volumeControl = document.getElementById("volumeControl");
+
+    function makeDraggable(dragItem, song) {
+      let isDragging = false;
+      let offsetX = 0;
+      let offsetY = 0;
+
+      const startLeft = dragItem.offsetLeft;
+      const startTop = dragItem.offsetTop;
+
+      dragItem.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        isDragging = true;
+        dragItem.style.cursor = "grabbing";
+        offsetX = e.clientX - dragItem.offsetLeft;
+        offsetY = e.clientY - dragItem.offsetTop;
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        dragItem.style.left = (e.clientX - offsetX) + "px";
+        dragItem.style.top  = (e.clientY - offsetY) + "px";
+      });
+
+      document.addEventListener("mouseup", () => {
+        if (!isDragging) return;
+        isDragging = false;
+        dragItem.style.cursor = "grab";
+
+        const dragRect = dragItem.getBoundingClientRect();
+        const dropRect = dropTarget.getBoundingClientRect();
+
+        const isOver =
+          dragRect.right  > dropRect.left &&
+          dragRect.left   < dropRect.right &&
+          dragRect.bottom > dropRect.top &&
+          dragRect.top    < dropRect.bottom;
+
+        if (isOver) {
+          // Stop other songs and reset buttons
+          allButtons.forEach(item => {
+            if (item.song !== song) {
+              item.song.pause();
+              item.song.currentTime = 0;
+              item.button.src = "music/8BD CD website.png";
+            }
+          });
+
+          // Play selected song
+          song.currentTime = 0;
+          song.volume = volumeControl.value;
+          song.play();
+          dragItem.src = "music/8BD CD empty website.png";
+          currentSong = song;
+          currentButton = dragItem;
+
+          song.onended = () => {
+            dragItem.src = "music/8BD CD website.png";
+            if (currentSong === song) {
+              currentSong = null;
+              currentButton = null;
+            }
+          };
+        }
+
+        // Reset button position immediately (no slow animation)
+        dragItem.style.left = startLeft + "px";
+        dragItem.style.top  = startTop + "px";
+      });
+    }
+
+    // Initialize draggable buttons
+    allButtons.forEach(item => makeDraggable(item.button, item.song));
+
+    // Jukebox click toggle play/pause
+    dropTarget.addEventListener("click", () => {
+      if (currentSong) {
+        if (!currentSong.paused) {
+          currentSong.pause();
+          currentButton.src = "music/8BD CD website.png";
+        } else {
+          currentSong.play();
+          currentButton.src = "music/8BD CD empty website.png";
+        }
+      }
+    });
+
+    // Volume control
+    volumeControl.addEventListener("input", () => {
+      if (currentSong) {
+        currentSong.volume = volumeControl.value;
+      }
+    });
+  </script>
 
 </body>
 </html>
